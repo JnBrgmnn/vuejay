@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <h1 class="heading">
+      <span>Dee</span>
+      <span>Jay</span>
+    </h1>
     <Mixer />
     <MusicList />
   </div>
@@ -19,11 +23,16 @@ export default {
 </script>
 
 <style lang="sass">
-#app
-  font-family: 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
+@import 'assets/sass/main'
+
+.heading
+  padding: 10px
   text-align: center
-  color: #2c3e50
-  margin-top: 60px
+  font-size: 48px
+
+  span:first-child
+      color: $color-primary
+
+  span:nth-child(2)
+      color: $color-secondary
 </style>
