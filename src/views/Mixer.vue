@@ -11,14 +11,17 @@ import AudioPlayer from '../components/AudioPlayer'
 import Panel from '../components/Panel'
 
 export default {
-    name: 'Mixer',
-    components: {
-      AudioPlayer,
-      Panel,
-    }
+  name: 'Mixer',
+  components: {
+    AudioPlayer,
+    Panel,
+  }
 }
 </script>
 
-<style>
-
+<style lang="sass" scoped>
+.mixer
+  display: flex
+  height: 40%
+  padding: 0 50px 20px
 </style>

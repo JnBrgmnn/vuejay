@@ -1,9 +1,9 @@
 <template>
   <div class="waveform-container">
-    <canvas width="500" height="500" class="waveform canvas--left"></canvas>
+<!--     <canvas width="200" height="200" class="waveform canvas--left"></canvas>
     <div class="track-duration">
       <span class="duration"></span>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -13,6 +13,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="sass" scoped>
 </style>

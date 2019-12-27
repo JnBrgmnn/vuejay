@@ -1,51 +1,54 @@
 <template>
   <div class="audio-player">
-    <div class="track-info">
-      <span class="artist"></span>
-      <span class="title"></span>
-    </div>
+    <TrackInfo />
     <WaveForm />
     <div class="effect-sliders">
-      <EffectSlider />
-      <EffectSlider />
+      <Slider />
+      <Slider />
     </div>
 
-    <div class="effects-container">
-      <div class="effects">
-        <button class="effect-button">Slicer</button>
-        <button class="dropdown-button"><i class="fas fa-caret-down"></i></button>
-        <div class="effects-dropdown-menu">
-          <div class="dropdown">
-            <div class="effect"></div>
-            <div class="effect"></div>
-            <div class="effect"></div>
-          </div>
-        </div>
-      </div>
-      <div class="loop-container">
-        <button class="minus-button"><i class="fas fa-minus"></i></button>
-        <button class="loop-button"><i class="fas fa-undo-alt"></i><span> 4</span></button>
-        <button class="plus-button"><i class="fas fa-plus"></i></button>
-      </div>
-      <div class="play-container">
-        <button class="play-button"><i class="fas fa-play"></i></button>
-      </div>
+    <div class="button-container">
+      <Effects />
+      <Loop />
+      <Play />
     </div>
   </div>
 </template>
 
 <script>
-import EffectSlider from './EffectSlider'
+import TrackInfo from './TrackInfo'
 import WaveForm from './WaveForm'
+import Slider from './Slider'
+import Effects from './Effects'
+import Loop from './Loop'
+import Play from './Play'
+
 export default {
   name: 'AudioPlayer',
   components: {
-    EffectSlider,
-    WaveForm
+    Slider,
+    WaveForm,
+    Effects,
+    Loop,
+    Play,
+    TrackInfo
   }
 }
 </script>
 
-<style>
+<style lang="sass" scoped>
+.audio-player
+  height: 100%
+  width: 40%
 
+  .effect-sliders
+    height: 15%
+    display: flex
+    justify-content: space-between
+
+  .button-container
+    height: 20%
+    display: flex
+    justify-content: space-between
+    align-items: center
 </style>

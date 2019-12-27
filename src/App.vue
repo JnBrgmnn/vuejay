@@ -23,7 +23,35 @@ export default {
 </script>
 
 <style lang="sass">
-@import 'assets/sass/main'
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap')
+@import 'assets/sass/variables'
+
+*
+  margin: 0
+  padding: 0
+
+body
+  background-color: $background-color
+  color: $font-color
+  font-family: "Montserrat", sans-serif
+  cursor: default
+
+  ::-webkit-scrollbar
+    width: 10px
+
+  ::-webkit-scrollbar-track 
+    background: $color-secondary-light
+    border-radius: 5px
+
+  ::-webkit-scrollbar-thumb
+    border-radius: 5px
+    background: $color-secondary
+
+    &:active
+      background: $color-secondary-dark
+
+#app
+  height: 100vh
 
 .heading
   padding: 10px
@@ -31,8 +59,8 @@ export default {
   font-size: 48px
 
   span:first-child
-      color: $color-primary
+    color: $color-primary
 
   span:nth-child(2)
-      color: $color-secondary
+    color: $color-secondary
 </style>

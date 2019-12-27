@@ -10,6 +10,7 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="sass" scoped>
+.music-list
+  height: 49%
 </style>
