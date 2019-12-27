@@ -56,7 +56,7 @@ body
 .heading
   padding: 10px
   text-align: center
-  font-size: 48px
+  font-size: 58px
 
   span:first-child
     color: $color-primary
