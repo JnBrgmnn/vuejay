@@ -1,7 +1,9 @@
 <template>
   <div class="audio-player">
     <TrackInfo />
-    <WaveForm />
+    <div class="waveform-container">
+      <div id="waveform"></div>
+    </div>
     <div class="effect-sliders">
       <Slider />
       <Slider />
@@ -10,28 +12,42 @@
     <div class="button-container">
       <Effects />
       <Loop />
-      <Play />
+      <Play v-on:play="toggleTrack"/>
     </div>
   </div>
 </template>
 
 <script>
 import TrackInfo from './TrackInfo'
-import WaveForm from './WaveForm'
 import Slider from './Slider'
 import Effects from './Effects'
 import Loop from './Loop'
 import Play from './Play'
 
+import WaveSurfer from 'wavesurfer.js'
+
 export default {
   name: 'AudioPlayer',
   components: {
     Slider,
-    WaveForm,
     Effects,
     Loop,
     Play,
     TrackInfo
+  },
+  mounted() {
+    this.wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: 'violet',
+      progressColor: 'purple'
+    })
+
+    this.wavesurfer.load('./basic_beat.wav')
+  },
+  methods: {
+    toggleTrack() {
+      this.wavesurfer.playPause()
+    }
   }
 }
 </script>
