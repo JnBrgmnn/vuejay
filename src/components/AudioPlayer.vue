@@ -58,6 +58,20 @@ export default {
       progressColor: 'purple',
     })
     this.wavesurfer.load('./basic_beat.wav')
+
+    this.treble = this.wavesurfer.backend.ac.createBiquadFilter()
+    this.treble.type = 'highshelf'
+    this.treble.gain.value = 50
+
+    this.mid = this.wavesurfer.backend.ac.createBiquadFilter()
+    this.mid.type = 'peaking'
+    this.mid.gain.value = 50
+
+    this.bass = this.wavesurfer.backend.ac.createBiquadFilter()
+    this.bass.type = 'lowshelf'
+    this.bass.gain.value = 50
+
+    this.wavesurfer.backend.setFilters([this.treble, this.mid, this.bass])
   },
   methods: {
     setEffectValueLeft(value) {
@@ -75,20 +89,15 @@ export default {
     },
     toggleTrack() {
       this.wavesurfer.playPause()
-
-/*       this.treble = this.wavesurfer.backend.ac.createBiquadFilter()
-      this.treble.type = 'highshelf'
-      this.treble.gain.value = 25
-      this.wavesurfer.backend.setFilter(this.treble) */
     },
     setTreble(value) {
-      console.log('Treble', value)
+      this.treble.gain.value = value
     },
     setMid(value) {
-      console.log('Mid', value)
+      this.mid.gain.value = value
     },
     setBass(value) {
-      console.log('Bass', value)
+      this.bass.gain.value = value
     },
     setVolume(value) {
       console.log('Volume', value)
