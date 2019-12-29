@@ -19,6 +19,7 @@ export default {
 
 <style lang="sass" scoped>
 @import '../assets/sass/variables'
+
 .slider
   -webkit-appearance: none
   width: 290px

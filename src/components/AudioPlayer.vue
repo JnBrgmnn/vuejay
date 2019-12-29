@@ -88,15 +88,15 @@ export default {
 
     this.treble = this.wavesurfer.backend.ac.createBiquadFilter()
     this.treble.type = 'highshelf'
-    this.treble.gain.value = 25
+    this.treble.gain.value = 5
 
     this.mid = this.wavesurfer.backend.ac.createBiquadFilter()
     this.mid.type = 'peaking'
-    this.mid.gain.value = 25
+    this.mid.gain.value = 5
 
     this.bass = this.wavesurfer.backend.ac.createBiquadFilter()
     this.bass.type = 'lowshelf'
-    this.bass.gain.value = 25
+    this.bass.gain.value = 5
 
     this.wavesurfer.backend.setFilters([this.treble, this.mid, this.bass])
   },
@@ -127,13 +127,13 @@ export default {
       this.wavesurfer.playPause()
     },
     setTreble(value) {
-      this.treble.gain.value = value/2
+      this.treble.gain.value = value/10
     },
     setMid(value) {
-      this.mid.gain.value = value/2
+      this.mid.gain.value = value/10
     },
     setBass(value) {
-      this.bass.gain.value = value/2
+      this.bass.gain.value = value/10
     },
     setVolume(value) {
       this.wavesurfer.setVolume(value/100)
