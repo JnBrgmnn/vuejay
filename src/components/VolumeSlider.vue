@@ -1,10 +1,18 @@
 <template>
-  <input type="range" class="volume-slider">
+  <input 
+      type="range" 
+      class="volume-slider"
+      @input="handleInput">
 </template>
 
 <script>
 export default {
-  name: 'VolumeSlider'
+  name: 'VolumeSlider',
+  methods: {
+    handleInput(event) {
+      this.$emit('volumeInput', event.target.value)
+    }
+  }
 }
 </script>
 

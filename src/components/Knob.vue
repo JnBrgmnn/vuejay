@@ -1,7 +1,7 @@
 <template>
   <div class="knob">
     <circle-slider class="knob-slider"
-        v-model="sliderValue"
+        v-model="computedSliderVal"
         :progress-width="8"
         :circleWidth="8"
         :knob-radius="8"
@@ -26,12 +26,23 @@ export default {
     return {
       sliderValue: 50
     }
+  },
+  computed: {
+    computedSliderVal: {
+      get() {
+        return this.value ? this.value : this.sliderValue
+      },
+      set(value) {
+        this.sliderValue = value
+        this.$emit('knob', value)
+      }
+    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-.knob 
+.knob
   width: 100px
   text-align: center
 </style>
