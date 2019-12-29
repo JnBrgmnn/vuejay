@@ -1,16 +1,16 @@
 {
     "data": [
-        {"artist": "Linkin Park", "title": "In The End", "duration": "03:38", "path": "../assets/music/Linkin_Park-In_The_End.mp3"},
-        {"artist": "Feint", "title": "Snake Eyes (feat. CoMa)", "duration": "04:25", "path": "../assets/music/Feint-Snake_Eyes_(feat._CoMa).mp3"},
-        {"artist": "Pendulum", "title": "The Island - Part 1 (Dawn)", "duration": "05:21", "path": "../assets/music/Pendulum-The_Island-Part1_(Dawn).mp3"},
-        {"artist": "The Midnight", "title": "Shadows", "duration": "06:29", "path": "../assets/music/The_Midnight-Shadows.mp3"},
-        {"artist": "Celldweller", "title": "Frozen", "duration": "05:26", "path": "../assets/music/Celldweller-Frozen_(Remix).mp3"},
-        {"artist": "Rameses B", "title": "Memoirs", "duration": "05:42", "path": "../assets/music/Rameses_B-Memoirs.mp3"},
-        {"artist": "The Midnight", "title": "Jason (feat. Nikki Flores)", "duration": "05:32", "path": "../assets/music/The_Midnight-Jason_(feat._Nikki_Flores).mp3"},
-        {"artist": "Three Days Grace", "title": "Animal I Have Become (Remix)", "duration": "04:02", "path": "../assets/music/Three_Days_Grace-Animal_I_Have_Become_(Remix).mp3"},
-        {"artist": "Miami Nights 1984", "title": "Accelerated", "duration": "03:55", "path": "../assets/music/Miami_Nights_1984-Accelerated.mp3"},
-        {"artist": "Feint", "title": "Vagrant (feat. Veela)", "duration": "03:43", "path": "../assets/music/Feint-Vagrant_(feat._Veela).mp3"},
-        {"artist": "Modestep", "title": "Sunlight", "duration": "02:41", "path": "../assets/music/Modestep-Sunlight.mp3"},
-        {"artist": "Flux Pavilion", "title": "I Can't Stop", "duration": "02:27", "path": "../assets/music/Flux_Pavilion-I-Cant-Stop.mp3"}
+        {"artist": "Linkin Park", "title": "In The End", "duration": "03:38", "path": "./Linkin_Park-In_The_End.mp3"},
+        {"artist": "Feint", "title": "Snake Eyes (feat. CoMa)", "duration": "04:25", "path": "./Feint-Snake_Eyes_(feat._CoMa).mp3"},
+        {"artist": "Pendulum", "title": "The Island - Part 1 (Dawn)", "duration": "05:21", "path": "./Pendulum-The_Island-Part1_(Dawn).mp3"},
+        {"artist": "The Midnight", "title": "Shadows", "duration": "06:29", "path": "./The_Midnight-Shadows.mp3"},
+        {"artist": "Celldweller", "title": "Frozen", "duration": "05:26", "path": "./Celldweller-Frozen_(Remix).mp3"},
+        {"artist": "Rameses B", "title": "Memoirs", "duration": "05:42", "path": "./Rameses_B-Memoirs.mp3"},
+        {"artist": "The Midnight", "title": "Jason (feat. Nikki Flores)", "duration": "05:32", "path": "./The_Midnight-Jason_(feat._Nikki_Flores).mp3"},
+        {"artist": "Three Days Grace", "title": "Animal I Have Become (Remix)", "duration": "04:02", "path": "./Three_Days_Grace-Animal_I_Have_Become_(Remix).mp3"},
+        {"artist": "Miami Nights 1984", "title": "Accelerated", "duration": "03:55", "path": "./Miami_Nights_1984-Accelerated.mp3"},
+        {"artist": "Feint", "title": "Vagrant (feat. Veela)", "duration": "03:43", "path": "./Feint-Vagrant_(feat._Veela).mp3"},
+        {"artist": "Modestep", "title": "Sunlight", "duration": "02:41", "path": "./Modestep-Sunlight.mp3"},
+        {"artist": "Flux Pavilion", "title": "I Can't Stop", "duration": "02:27", "path": "./Flux_Pavilion-I-Cant-Stop.mp3"}
     ]
 }

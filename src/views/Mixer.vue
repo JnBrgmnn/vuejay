@@ -1,7 +1,7 @@
 <template>
   <div class="mixer">
-    <AudioPlayer :number="'one'"/>
-    <AudioPlayer :number="'two'"/>
+    <AudioPlayer :number="'one'" :path="pathTrackOne"/>
+    <AudioPlayer :number="'two'" :path="pathTrackTwo"/>
   </div>
 </template>
 
@@ -12,6 +12,10 @@ export default {
   name: 'Mixer',
   components: {
     AudioPlayer,
+  },
+  props: {
+    pathTrackOne: String,
+    pathTrackTwo: String
   }
 }
 </script>

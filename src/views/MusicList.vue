@@ -1,7 +1,10 @@
 <template>
   <div class="music-list">
     <div class="search-container">
-      <input class="search-bar" placeholder="Suche deinen Song!">
+      <input 
+          class="search-bar" 
+          placeholder="Suche deinen Song!"
+          @keyup="filterSongs">
     </div>
     <div class="music-table-container">
       <table class="music-table">
@@ -11,11 +14,11 @@
           <th class="titel-column">Title</th>
           <th class="duration-column">Duration</th>
         </tr>
-        <tr v-for="(entry, index) in entries" :key="index">
+        <tr v-for="(entry, index) in filteredEntries" :key="index">
           <td>
             <div class="table-button-container">
-              <button class="track-one"></button>
-              <button class="track-two"></button>
+              <button class="track-one" @click="setPathTrackOne(entry.path)"></button>
+              <button class="track-two" @click="setPathTrackTwo(entry.path)"></button>
             </div>
           </td>
           <td>{{ entry.artist }}</td>
@@ -33,6 +36,7 @@ export default {
     data() {
       return {
         entries: null,
+        filteredEntries: null,
       }
     },
     mounted() {
@@ -40,6 +44,7 @@ export default {
       promise.then((response) => {
         const data = JSON.parse(response)
         this.entries = data.data
+        this.filteredEntries = this.entries
       })
     },
     methods: {
@@ -56,6 +61,21 @@ export default {
           request.send(null)
         })
       },
+      setPathTrackOne(path) {
+        this.$emit('pathTrackOne', path)
+      },
+      setPathTrackTwo(path) {
+        this.$emit('pathTrackTwo', path)
+      },
+      filterSongs(event) {
+        let inputLowerCase = event.target.value.toLowerCase()
+
+        this.filteredEntries = this.entries.filter((entry) => {
+          return  entry.artist.toLowerCase().indexOf(inputLowerCase) > -1 ||
+                  entry.title.toLowerCase().indexOf(inputLowerCase) > -1 ||
+                  (entry.artist.toLowerCase() + ' ' + entry.title.toLowerCase()).indexOf(inputLowerCase) > -1
+        })
+      }
     }
 }
 </script>

@@ -4,8 +4,12 @@
       <span>Dee</span>
       <span>Jay</span>
     </h1>
-    <Mixer />
-    <MusicList />
+    <Mixer 
+        :pathTrackOne="pathTrackOne"
+        :pathTrackTwo="pathTrackTwo"/>
+    <MusicList 
+        @pathTrackOne="setPathTrackOne"
+        @pathTrackTwo="setPathTrackTwo"/>
   </div>
 </template>
 
@@ -18,6 +22,20 @@ export default {
   components: {
     Mixer,
     MusicList
+  },
+  data() {
+    return {
+      pathTrackOne: null,
+      pathTrackTwo: null,
+    }
+  },
+  methods: {
+    setPathTrackOne(path) {
+      this.pathTrackOne = path
+    },
+    setPathTrackTwo(path) {
+      this.pathTrackTwo = path
+    }
   }
 }
 </script>

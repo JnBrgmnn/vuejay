@@ -60,7 +60,8 @@ export default {
     VolumeSlider
   },
   props: {
-    number: String
+    number: String,
+    path: String
   },
   mounted() {
     if(this.number === 'one') {
@@ -138,7 +139,12 @@ export default {
     setVolume(value) {
       this.wavesurfer.setVolume(value/100)
     }
-  }
+  },
+  watch: {
+    path: function(path) {
+      this.wavesurfer.load(path)
+    }
+  },
 }
 </script>
 
