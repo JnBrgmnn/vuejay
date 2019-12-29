@@ -1,12 +1,12 @@
 <template>
   <div class="effects-container">
-    <button class="effect-button"></button>
-    <button class="dropdown-button"><i class="fas fa-caret-down"></i></button>
-    <div class="dropdown-menu">
+    <button class="effect-button" @click="handleEffect">{{ activeEffect }}</button>
+    <button class="dropdown-button" @click="toggleDropdown"><i class="fas fa-caret-down"></i></button>
+    <div class="dropdown-menu" v-show="isVisible">
       <div class="dropdown">
-        <div class="effect"></div>
-        <div class="effect"></div>
-        <div class="effect"></div>
+        <button class="effect" @click="setEffect(effects[0])">{{ effects[0] }}</button>
+        <button class="effect" @click="setEffect(effects[1])">{{ effects[1] }}</button>
+        <button class="effect" @click="setEffect(effects[2])">{{ effects[2] }}</button>
       </div>
     </div>
   </div>
@@ -14,7 +14,26 @@
 
 <script>
 export default {
-  name: 'Effects'
+  name: 'Effects',
+  data() {
+    return {
+      isVisible: false,
+      isActive: false,
+      effects: ['Bitcrusher', 'Reverb', 'Delay'],
+      activeEffect: 'Bitcrusher'
+    }
+  },
+  methods: {
+    handleEffect() {
+      this.$emit('effect', this.activeEffect)
+    },
+    toggleDropdown() {
+      this.isVisible = !this.isVisible
+    },
+    setEffect(effect) {
+      this.activeEffect = effect
+    }
+  }
 }
 </script>
 
@@ -40,15 +59,13 @@ export default {
     display: flex
     justify-content: center
     align-items: center
-    top: 49.6%
+    top: 56%
     width: 400px
     height: 50px
     background-color: $color-primary-light
     border-bottom-left-radius: 10px
     border-bottom-right-radius: 10px
     z-index: 10
-    transition: opacity .1s ease-in, height .1s ease-in
-    opacity: 0
 
     .dropdown
       display: flex
@@ -69,5 +86,5 @@ export default {
 
         &:hover
           background-color: $color-primary
-          cursor: pointer
+          cursor: default
 </style>

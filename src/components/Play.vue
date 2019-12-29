@@ -2,7 +2,7 @@
   <div class="play-container">
     <button 
           class="play-button"
-          @click="clickHandler"
+          @click="handleClick"
     ><i class="fas fa-play"></i></button>
   </div>
 </template>
@@ -12,13 +12,13 @@ export default {
   name: 'Play',
   data() {
     return {
-      isPlaying: false
+      isActive: false
     }
   },
   methods: {
-    clickHandler() {
-      this.isPlaying = !this.isPlaying
-      this.$emit('play', this.isPlaying)
+    handleClick() {
+      this.isActive = !this.isActive
+      this.$emit('play', this.isActive)
     }
   }
 }

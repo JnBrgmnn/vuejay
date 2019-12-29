@@ -1,10 +1,19 @@
 <template>
-  <input type="range" value="0" class="slider" />
+  <input 
+      type="range" 
+      value="0" 
+      class="slider" 
+      @input="handleInput"/>
 </template>
 
 <script>
 export default {
-  name: 'Slider'
+  name: 'Slider',
+  methods: {
+    handleInput(event) {
+      this.$emit('sliderInput', event.target.value)
+    }
+  }
 }
 </script>
 

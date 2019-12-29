@@ -1,14 +1,35 @@
 <template>
   <div class="loop-container">
-    <button class="minus-button"><i class="fas fa-minus"></i></button>
-    <button class="loop-button"><i class="fas fa-undo-alt"></i><span></span></button>
-    <button class="plus-button"><i class="fas fa-plus"></i></button>
+    <button class="minus-button" @click="reduceValue"><i class="fas fa-minus"></i></button>
+    <button class="loop-button" @click="handleLoop"><i class="fas fa-undo-alt"></i>{{ loopValue }}<span></span></button>
+    <button class="plus-button" @click="increaseValue"><i class="fas fa-plus"></i></button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Loop'
+  name: 'Loop',
+  data() {
+    return {
+      loopValue: 4,
+      isActive: false
+    }
+  },
+  methods: {
+    reduceValue() {
+      if(this.loopValue > 1) {
+        this.loopValue = this.loopValue / 2
+      }
+    },
+    increaseValue() {
+      if(this.loopValue < 16) {
+        this.loopValue = this.loopValue * 2
+      }
+    },
+    handleLoop() {
+      this.$emit('loop', this.loopValue)
+    }
+  }
 }
 </script>
 

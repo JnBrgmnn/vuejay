@@ -5,14 +5,14 @@
       <div id="waveform"></div>
     </div>
     <div class="effect-sliders">
-      <Slider />
-      <Slider />
+      <Slider @sliderInput="setEffectValueLeft"/>
+      <Slider @sliderInput="setEffectValueRight"/>
     </div>
 
     <div class="button-container">
-      <Effects />
-      <Loop />
-      <Play v-on:play="toggleTrack"/>
+      <Effects @effect="setEffect"/>
+      <Loop @loop="loopTrack"/>
+      <Play @play="toggleTrack"/>
     </div>
   </div>
 </template>
@@ -39,15 +39,32 @@ export default {
     this.wavesurfer = WaveSurfer.create({
       container: '#waveform',
       waveColor: 'violet',
-      progressColor: 'purple'
+      progressColor: 'purple',
     })
-
     this.wavesurfer.load('./basic_beat.wav')
   },
   methods: {
+    setEffectValueLeft(value) {
+      console.log('Left Effect Slider', value)
+    },
+    setEffectValueRight(value) {
+      console.log('Right Effect Slider', value)
+    },
+    
+    setEffect(value) {
+      console.log('Effect', value)
+    },
+    loopTrack(value) {
+      console.log('Loop Button', value)
+    },
     toggleTrack() {
       this.wavesurfer.playPause()
-    }
+
+/*       this.treble = this.wavesurfer.backend.ac.createBiquadFilter()
+      this.treble.type = 'highshelf'
+      this.treble.gain.value = 25
+      this.wavesurfer.backend.setFilter(this.treble) */
+    },
   }
 }
 </script>
