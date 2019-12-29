@@ -1,13 +1,16 @@
 <template>
   <div class="track-info">
-    <span class="artist"></span>
-    <span class="title"></span>
+    <span class="artist">{{ song ? song.artist + ' - ' : 'Linkin Park - ' }}</span>
+    <span class="title">{{ song ? song.title : 'In The End' }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TrackInfo'
+  name: 'TrackInfo',
+  props: {
+    song: Object
+  }
 }
 </script>
 

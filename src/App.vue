@@ -5,11 +5,11 @@
       <span>Jay</span>
     </h1>
     <Mixer 
-        :pathTrackOne="pathTrackOne"
-        :pathTrackTwo="pathTrackTwo"/>
+        :songTrackOne="songTrackOne"
+        :songTrackTwo="songTrackTwo"/>
     <MusicList 
-        @pathTrackOne="setPathTrackOne"
-        @pathTrackTwo="setPathTrackTwo"/>
+        @songTrackOne="setSongTrackOne"
+        @songTrackTwo="setSongTrackTwo"/>
   </div>
 </template>
 
@@ -25,16 +25,16 @@ export default {
   },
   data() {
     return {
-      pathTrackOne: null,
-      pathTrackTwo: null,
+      songTrackOne: null,
+      songTrackTwo: null,
     }
   },
   methods: {
-    setPathTrackOne(path) {
-      this.pathTrackOne = path
+    setSongTrackOne(song) {
+      this.songTrackOne = song
     },
-    setPathTrackTwo(path) {
-      this.pathTrackTwo = path
+    setSongTrackTwo(song) {
+      this.songTrackTwo = song
     }
   }
 }

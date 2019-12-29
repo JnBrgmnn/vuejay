@@ -14,16 +14,16 @@
           <th class="titel-column">Title</th>
           <th class="duration-column">Duration</th>
         </tr>
-        <tr v-for="(entry, index) in filteredEntries" :key="index">
+        <tr v-for="(song, index) in filteredSongs" :key="index">
           <td>
             <div class="table-button-container">
-              <button class="track-one" @click="setPathTrackOne(entry.path)"></button>
-              <button class="track-two" @click="setPathTrackTwo(entry.path)"></button>
+              <button class="track-one" @click="setSongTrackOne(song)"></button>
+              <button class="track-two" @click="setSongTrackTwo(song)"></button>
             </div>
           </td>
-          <td>{{ entry.artist }}</td>
-          <td>{{ entry.title }}</td>
-          <td>{{ entry.duration }}</td>
+          <td>{{ song.artist }}</td>
+          <td>{{ song.title }}</td>
+          <td>{{ song.duration }}</td>
         </tr>
     </table>
     </div>
@@ -35,16 +35,16 @@ export default {
     name: 'MusicList',
     data() {
       return {
-        entries: null,
-        filteredEntries: null,
+        songs: null,
+        filteredSongs: null,
       }
     },
     mounted() {
       let promise = this.loadJSON()
       promise.then((response) => {
         const data = JSON.parse(response)
-        this.entries = data.data
-        this.filteredEntries = this.entries
+        this.songs = data.data
+        this.filteredSongs = this.songs
       })
     },
     methods: {
@@ -61,19 +61,19 @@ export default {
           request.send(null)
         })
       },
-      setPathTrackOne(path) {
-        this.$emit('pathTrackOne', path)
+      setSongTrackOne(song) {
+        this.$emit('songTrackOne', song)
       },
-      setPathTrackTwo(path) {
-        this.$emit('pathTrackTwo', path)
+      setSongTrackTwo(song) {
+        this.$emit('songTrackTwo', song)
       },
       filterSongs(event) {
         let inputLowerCase = event.target.value.toLowerCase()
 
-        this.filteredEntries = this.entries.filter((entry) => {
-          return  entry.artist.toLowerCase().indexOf(inputLowerCase) > -1 ||
-                  entry.title.toLowerCase().indexOf(inputLowerCase) > -1 ||
-                  (entry.artist.toLowerCase() + ' ' + entry.title.toLowerCase()).indexOf(inputLowerCase) > -1
+        this.filteredSongs = this.songs.filter((song) => {
+          return  song.artist.toLowerCase().indexOf(inputLowerCase) > -1 ||
+                  song.title.toLowerCase().indexOf(inputLowerCase) > -1 ||
+                  (song.artist.toLowerCase() + ' ' + song.title.toLowerCase()).indexOf(inputLowerCase) > -1
         })
       }
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="audio-player">
     <div class="container">
-      <TrackInfo />
+      <TrackInfo :song="song"/>
       <div class="waveform-container">
         <div 
             v-if="number==='one'"
@@ -61,7 +61,7 @@ export default {
   },
   props: {
     number: String,
-    path: String
+    song: Object
   },
   mounted() {
     if(this.number === 'one') {
@@ -85,7 +85,7 @@ export default {
         ]
       })
     }
-    this.wavesurfer.load('./basic_beat.wav')
+    this.wavesurfer.load('./Linkin_Park-In_The_End.mp3')
 
     this.treble = this.wavesurfer.backend.ac.createBiquadFilter()
     this.treble.type = 'highshelf'
@@ -108,7 +108,6 @@ export default {
     setEffectValueRight(value) {
       console.log('Right Effect Slider', value)
     },
-
     setEffect(value) {
       console.log('Effect', value)
     },
@@ -141,8 +140,8 @@ export default {
     }
   },
   watch: {
-    path: function(path) {
-      this.wavesurfer.load(path)
+    song: function(song) {
+      this.wavesurfer.load(song.path)
     }
   },
 }
