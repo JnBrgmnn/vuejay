@@ -27,7 +27,9 @@ export default {
       }
     },
     handleLoop() {
-      this.$emit('loop', this.loopValue)
+      this.isActive = !this.isActive
+
+      this.$emit('loop', this.loopValue, this.isActive)
     }
   }
 }

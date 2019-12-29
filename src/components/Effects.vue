@@ -59,7 +59,7 @@ export default {
     display: flex
     justify-content: center
     align-items: center
-    top: 56%
+    top: 40.5%
     width: 400px
     height: 50px
     background-color: $color-primary-light

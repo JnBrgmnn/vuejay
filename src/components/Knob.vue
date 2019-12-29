@@ -17,17 +17,16 @@
 </template>
 
 <script>
-
 export default {
   name: 'Knob',
-  props: {
-    text: String,
-  },
   data() {
     return {
       sliderValue: 50,
       isReady: false
     }
+  },
+  props: {
+    text: String,
   },
   methods: {
     handleInput(value) {

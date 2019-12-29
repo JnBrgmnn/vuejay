@@ -3,7 +3,14 @@
     <div class="container">
       <TrackInfo />
       <div class="waveform-container">
-        <div id="waveform"></div>
+        <div 
+            v-if="number==='one'"
+            id="waveform-left">
+        </div>
+        <div 
+            v-else-if="number==='two'"
+            id="waveform-right">
+        </div>
       </div>
       <div class="effect-sliders">
         <Slider @sliderInput="setEffectValueLeft"/>
@@ -39,6 +46,7 @@ import Knob from './Knob'
 import VolumeSlider from './VolumeSlider'
 
 import WaveSurfer from 'wavesurfer.js'
+import Regions from 'wavesurfer.js/dist/plugin/wavesurfer.regions.min.js'
 
 export default {
   name: 'AudioPlayer',
@@ -51,25 +59,44 @@ export default {
     Knob,
     VolumeSlider
   },
+  props: {
+    number: String
+  },
   mounted() {
-    this.wavesurfer = WaveSurfer.create({
-      container: '#waveform',
-      waveColor: 'violet',
-      progressColor: 'purple',
-    })
+    if(this.number === 'one') {
+      this.wavesurfer = WaveSurfer.create({
+        container: '#waveform-left',
+        waveColor: '#ffd8d6',
+        progressColor: '#EE4540',
+        plugins: [
+          Regions.create({})
+        ]
+      })
+    }
+
+    if(this.number === 'two') {
+      this.wavesurfer = WaveSurfer.create({
+        container: '#waveform-right',
+        waveColor: '#f28f9d',
+        progressColor: '#C72C41',
+        plugins: [
+          Regions.create({})
+        ]
+      })
+    }
     this.wavesurfer.load('./basic_beat.wav')
 
     this.treble = this.wavesurfer.backend.ac.createBiquadFilter()
     this.treble.type = 'highshelf'
-    this.treble.gain.value = 50
+    this.treble.gain.value = 25
 
     this.mid = this.wavesurfer.backend.ac.createBiquadFilter()
     this.mid.type = 'peaking'
-    this.mid.gain.value = 50
+    this.mid.gain.value = 25
 
     this.bass = this.wavesurfer.backend.ac.createBiquadFilter()
     this.bass.type = 'lowshelf'
-    this.bass.gain.value = 50
+    this.bass.gain.value = 25
 
     this.wavesurfer.backend.setFilters([this.treble, this.mid, this.bass])
   },
@@ -84,23 +111,32 @@ export default {
     setEffect(value) {
       console.log('Effect', value)
     },
-    loopTrack(value) {
-      console.log('Loop Button', value)
+    loopTrack(loopValue, isLooped) {
+      if(isLooped) {
+        this.wavesurfer.addRegion({
+          id: 0,
+          start: this.wavesurfer.getCurrentTime(),
+          end: this.wavesurfer.getCurrentTime() + loopValue,
+          loop: true,
+        })
+      } else {
+        this.wavesurfer.clearRegions()
+      }
     },
     toggleTrack() {
       this.wavesurfer.playPause()
     },
     setTreble(value) {
-      this.treble.gain.value = value
+      this.treble.gain.value = value/2
     },
     setMid(value) {
-      this.mid.gain.value = value
+      this.mid.gain.value = value/2
     },
     setBass(value) {
-      this.bass.gain.value = value
+      this.bass.gain.value = value/2
     },
     setVolume(value) {
-      console.log('Volume', value)
+      this.wavesurfer.setVolume(value/100)
     }
   }
 }
