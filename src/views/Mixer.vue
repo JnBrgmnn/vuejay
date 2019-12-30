@@ -1,7 +1,7 @@
 <template>
   <div class="mixer">
-    <AudioPlayer :number="'one'" :song="songTrackOne"/>
-    <AudioPlayer :number="'two'" :song="songTrackTwo"/>
+    <AudioPlayer :secondaryColor="false" :song="songTrackOne"/>
+    <AudioPlayer :secondaryColor="true" :song="songTrackTwo"/>
   </div>
 </template>
 

@@ -1,15 +1,9 @@
 <template>
-  <div class="audio-player">
+  <div v-if="secondaryColor === false" class="audio-player">
     <div class="container">
       <TrackInfo :song="song"/>
       <div class="waveform-container">
-        <div 
-            v-if="number==='one'"
-            id="waveform-left">
-        </div>
-        <div 
-            v-else-if="number==='two'"
-            id="waveform-right">
+        <div id="waveform-left">
         </div>
       </div>
       <div class="effect-sliders">
@@ -25,12 +19,44 @@
 
     <div class="panel-container">
       <div class="knob-container">
-        <Knob text="Treble" @knob="setTreble"/>
-        <Knob text="Mid" @knob="setMid"/>
-        <Knob text="Bass" @knob="setBass"/>
+        <Knob text="Treble" @knob="setTreble" :secondaryColor="secondaryColor"/>
+        <Knob text="Mid" @knob="setMid" :secondaryColor="secondaryColor"/>
+        <Knob text="Bass" @knob="setBass" :secondaryColor="secondaryColor"/>
       </div>
       <div class="volume-container">
         <VolumeSlider @volumeInput="setVolume"/>
+      </div>
+    </div>
+  </div>
+
+  <div v-else-if="secondaryColor === true" class="audio-player secondary-color">
+    <div class="container">
+      <TrackInfo :song="song"/>
+      <div class="waveform-container">
+        <div id="waveform-left">
+        </div>
+        <div id="waveform-right">
+        </div>
+      </div>
+      <div class="effect-sliders">
+        <Slider @sliderInput="setEffectValueLeft"/>
+        <Slider @sliderInput="setEffectValueRight"/>
+      </div>
+      <div class="button-container secondary-color">
+        <Effects @effect="setEffect"/>
+        <Loop @loop="loopTrack" :secondaryColor="secondaryColor"/>
+        <Play @play="toggleTrack" :secondaryColor="secondaryColor"/>
+      </div>
+    </div>
+
+    <div class="panel-container secondary-color">
+      <div class="knob-container">
+        <Knob text="Treble" @knob="setTreble" :secondaryColor="secondaryColor"/>
+        <Knob text="Mid" @knob="setMid" :secondaryColor="secondaryColor"/>
+        <Knob text="Bass" @knob="setBass" :secondaryColor="secondaryColor"/>
+      </div>
+      <div class="volume-container">
+        <VolumeSlider @volumeInput="setVolume" :secondaryColor="secondaryColor"/>
       </div>
     </div>
   </div>
@@ -60,11 +86,11 @@ export default {
     VolumeSlider
   },
   props: {
-    number: String,
+    secondaryColor: Boolean,
     song: Object
   },
-  mounted() {
-    if(this.number === 'one') {
+  async mounted() {
+    if(this.secondaryColor === false) {
       this.wavesurfer = WaveSurfer.create({
         container: '#waveform-left',
         waveColor: '#ffd8d6',
@@ -75,7 +101,7 @@ export default {
       })
     }
 
-    if(this.number === 'two') {
+    if(this.secondaryColor === true) {
       this.wavesurfer = WaveSurfer.create({
         container: '#waveform-right',
         waveColor: '#f28f9d',
@@ -153,6 +179,9 @@ export default {
   height: 100%
   width: 50%
 
+  &.secondary-color
+    flex-direction: row-reverse
+
   .container
     width: 80%
 
@@ -167,10 +196,16 @@ export default {
       justify-content: space-between
       align-items: center
 
+      &.secondary-color
+        flex-direction: row-reverse
+
   .panel-container
     display: flex
     width: 20%
     height: 100%
+
+    &.secondary-color
+      flex-direction: row-reverse
 
     .knob-container
       height: 100%

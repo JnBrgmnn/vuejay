@@ -1,8 +1,13 @@
 <template>
-  <div class="loop-container">
+  <div v-if="secondaryColor === false" class="loop-container">
     <button class="minus-button" @click="reduceValue"><i class="fas fa-minus"></i></button>
     <button class="loop-button" @click="handleLoop"><i class="fas fa-undo-alt"></i>{{ loopValue }}<span></span></button>
     <button class="plus-button" @click="increaseValue"><i class="fas fa-plus"></i></button>
+  </div>
+  <div v-else-if="secondaryColor === true" class="loop-container">
+    <button class="minus-button secondary-color" @click="reduceValue"><i class="fas fa-minus"></i></button>
+    <button class="loop-button secondary-color" @click="handleLoop"><i class="fas fa-undo-alt"></i>{{ loopValue }}<span></span></button>
+    <button class="plus-button secondary-color" @click="increaseValue"><i class="fas fa-plus"></i></button>
   </div>
 </template>
 
@@ -14,6 +19,9 @@ export default {
       loopValue: 4,
       isActive: false
     }
+  },
+  props: {
+    secondaryColor: Boolean,
   },
   methods: {
     reduceValue() {
@@ -46,8 +54,32 @@ export default {
 
   .minus-button
     width: 18%
+    border-right: solid 2px $color-primary-dark
+
+    &.secondary-color
+      background-color: $color-secondary
+      border-right: solid 2px $color-secondary-dark
+
+      &:active
+        background-color: $color-secondary-dark
+
   .loop-button
-      width: 64%
+    width: 64%
+
+    &.secondary-color
+      background-color: $color-secondary
+
+      &:active
+        background-color: $color-secondary-dark
+
   .plus-button
-      width: 18%
+    width: 18%
+    border-left: solid 2px $color-primary-dark
+
+    &.secondary-color
+      background-color: $color-secondary
+      border-left: solid 2px $color-secondary-dark
+
+      &:active
+        background-color: $color-secondary-dark
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="knob">
-    <circle-slider class="knob-slider"
+    <circle-slider v-if="secondaryColor === false" class="knob-slider"
         :value="sliderValue"
         @input="handleInput"
         :progress-width="8"
@@ -10,6 +10,17 @@
         :circleColor="'#ffd8d6'"
         :progressColor="'#EE4540'"
         :knobColor="'#EE4540'"
+    />
+    <circle-slider v-else-if="secondaryColor === true" class="knob-slider"
+        :value="sliderValue"
+        @input="handleInput"
+        :progress-width="8"
+        :circleWidth="8"
+        :knob-radius="8"
+        :side="50"
+        :circleColor="'#f28f9d'"
+        :progressColor="'#C72C41'"
+        :knobColor="'#C72C41'"
     />
     <p>{{ sliderValue }}</p>
     <p>{{ text }}</p>
@@ -27,6 +38,7 @@ export default {
   },
   props: {
     text: String,
+    secondaryColor: Boolean
   },
   methods: {
     handleInput(value) {

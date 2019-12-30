@@ -1,7 +1,11 @@
 <template>
   <div class="play-container">
-    <button 
+    <button v-if="secondaryColor === false"
           class="play-button"
+          @click="handleClick"
+    ><i class="fas fa-play"></i></button>
+    <button v-else-if="secondaryColor === true"
+          class="play-button secondary-color"
           @click="handleClick"
     ><i class="fas fa-play"></i></button>
   </div>
@@ -15,6 +19,9 @@ export default {
       isActive: false
     }
   },
+  props: {
+    secondaryColor: Boolean,
+  },
   methods: {
     handleClick() {
       this.isActive = !this.isActive
@@ -26,6 +33,7 @@ export default {
 
 <style lang="sass" scoped>
 @import '../assets/sass/button'
+@import '../assets/sass/variables'
 
 .play-container
   display: flex
@@ -35,4 +43,10 @@ export default {
     width: 100%
     border-radius: 2px
     overflow: hidden
+
+    &.secondary-color
+      background-color: $color-secondary
+
+      &:active
+        background-color: $color-secondary-dark
 </style>
