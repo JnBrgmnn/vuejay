@@ -1,5 +1,5 @@
 <template>
-  <div class="effects-container">
+  <div v-if="secondaryColor === false" class="effects-container">
     <button class="effect-button" @click="handleEffect">{{ activeEffect }}</button>
     <button class="dropdown-button" @click="toggleDropdown"><i class="fas fa-caret-down"></i></button>
     <div class="dropdown-menu" v-show="isVisible">
@@ -7,6 +7,17 @@
         <button class="effect" @click="setEffect(effects[0])">{{ effects[0] }}</button>
         <button class="effect" @click="setEffect(effects[1])">{{ effects[1] }}</button>
         <button class="effect" @click="setEffect(effects[2])">{{ effects[2] }}</button>
+      </div>
+    </div>
+  </div>
+  <div v-else-if="secondaryColor === true" class="effects-container">
+    <button class="effect-button secondary-color" @click="handleEffect">{{ activeEffect }}</button>
+    <button class="dropdown-button secondary-color" @click="toggleDropdown"><i class="fas fa-caret-down"></i></button>
+    <div class="dropdown-menu secondary-color" v-show="isVisible">
+      <div class="dropdown secondary-color">
+        <button class="effect secondary-color" @click="setEffect(effects[0])">{{ effects[0] }}</button>
+        <button class="effect secondary-color" @click="setEffect(effects[1])">{{ effects[1] }}</button>
+        <button class="effect secondary-color" @click="setEffect(effects[2])">{{ effects[2] }}</button>
       </div>
     </div>
   </div>
@@ -34,6 +45,9 @@ export default {
     setEffect(effect) {
       this.activeEffect = effect
     }
+  },
+  props: {
+    secondaryColor: Boolean,
   }
 }
 </script>
@@ -51,22 +65,34 @@ export default {
 
   .effect-button
     width: 85%
+    border-right: solid 2px $color-primary-dark
+
+    &.secondary-color
+      background-color: $color-secondary
+      border-right: solid 2px $color-secondary-dark
 
   .dropdown-button
     width: 15%
+
+    &.secondary-color
+      background-color: $color-secondary
 
   .dropdown-menu
     position: absolute
     display: flex
     justify-content: center
     align-items: center
-    top: 42%
+    top: 39%
     width: 400px
     height: 50px
     background-color: $color-primary-light
     border-bottom-left-radius: 10px
     border-bottom-right-radius: 10px
     z-index: 10
+
+    &.secondary-color
+      background-color: $color-secondary-light
+      right: 2.6%
 
     .dropdown
       display: flex
@@ -84,6 +110,12 @@ export default {
         width: 30%
         height: 35px
         border-radius: 5px
+
+        &.secondary-color
+          background-color: $color-secondary-dark
+
+          &:hover
+            background-color: $color-secondary
 
         &:hover
           background-color: $color-primary

@@ -43,7 +43,7 @@
         <p>Playback-Rate: {{ this.playbackRate }}</p>
       </div>
       <div class="button-container secondary-color">
-        <Effects @effect="setEffect"/>
+        <Effects @effect="setEffect" :secondaryColor="secondaryColor"/>
         <Loop @loop="loopTrack" :secondaryColor="secondaryColor"/>
         <Play @play="toggleTrack" :secondaryColor="secondaryColor"/>
       </div>
