@@ -17,8 +17,8 @@
         <tr v-for="(song, index) in filteredSongs" :key="index">
           <td>
             <div class="table-button-container">
-              <button class="track-one" @click="setSongTrackOne(song)"></button>
-              <button class="track-two" @click="setSongTrackTwo(song)"></button>
+              <button class="track-one" @click="setSongTrackOne(song)"><i class="fas fa-play"></i></button>
+              <button class="track-two" @click="setSongTrackTwo(song)"><i class="fas fa-play"></i></button>
             </div>
           </td>
           <td>{{ song.artist }}</td>

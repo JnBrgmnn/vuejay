@@ -1,12 +1,12 @@
 <template>
   <div v-if="secondaryColor === false" class="loop-container">
     <button class="minus-button" @click="reduceValue"><i class="fas fa-minus"></i></button>
-    <button class="loop-button" @click="handleLoop"><i class="fas fa-undo-alt"></i>{{ loopValue }}<span></span></button>
+    <button class="loop-button" @click="handleLoop"><i class="fas fa-undo-alt"></i><span class="loop-value">{{ loopValue }}</span></button>
     <button class="plus-button" @click="increaseValue"><i class="fas fa-plus"></i></button>
   </div>
   <div v-else-if="secondaryColor === true" class="loop-container">
     <button class="minus-button secondary-color" @click="reduceValue"><i class="fas fa-minus"></i></button>
-    <button class="loop-button secondary-color" @click="handleLoop"><i class="fas fa-undo-alt"></i>{{ loopValue }}<span></span></button>
+    <button class="loop-button secondary-color" @click="handleLoop"><i class="fas fa-undo-alt"></i><span class="loop-value">{{ loopValue }}</span></button>
     <button class="plus-button secondary-color" @click="increaseValue"><i class="fas fa-plus"></i></button>
   </div>
 </template>
@@ -65,6 +65,9 @@ export default {
 
   .loop-button
     width: 64%
+
+    .loop-value
+      margin-left: 5px
 
     &.secondary-color
       background-color: $color-secondary
