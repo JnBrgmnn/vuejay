@@ -6,9 +6,9 @@
         <div id="waveform-left">
         </div>
       </div>
-      <div class="effect-sliders">
-        <Slider @sliderInput="setEffectValueLeft"/>
-        <Slider @sliderInput="setEffectValueRight"/>
+      <div class="playback-rate-container">
+        <Slider @sliderInput="setPlaybackRate"/>
+        <p>Playback-Rate: {{ this.playbackRate }}</p>
       </div>
       <div class="button-container">
         <Effects @effect="setEffect"/>
@@ -38,9 +38,9 @@
         <div id="waveform-right">
         </div>
       </div>
-      <div class="effect-sliders">
-        <Slider @sliderInput="setEffectValueLeft"/>
-        <Slider @sliderInput="setEffectValueRight"/>
+      <div class="playback-rate-container">
+        <Slider @sliderInput="setPlaybackRate" :secondaryColor="secondaryColor"/>
+        <p>Playback-Rate: {{ this.playbackRate }}</p>
       </div>
       <div class="button-container secondary-color">
         <Effects @effect="setEffect"/>
@@ -84,6 +84,11 @@ export default {
     TrackInfo,
     Knob,
     VolumeSlider
+  },
+  data() {
+    return {
+      playbackRate: 1,
+    }
   },
   props: {
     secondaryColor: Boolean,
@@ -132,9 +137,17 @@ export default {
         parameterData: {bitDepth: 4, frequencyReduction: .5}
       })
     })
-    
   },
   methods: {
+    setPlaybackRate(value) {
+      if(value > 0) {
+        this.playbackRate = value/50
+        this.wavesurfer.setPlaybackRate(this.playbackRate)
+      } else {
+        this.playbackRate = 1/50
+        this.wavesurfer.setPlaybackRate(this.playbackRate)
+      }
+    },
     setEffect(isActive, effect) {
       if(isActive) {
         if(effect === 'Bitcrusher') {
@@ -192,10 +205,13 @@ export default {
   .container
     width: 80%
 
-    .effect-sliders
+    .playback-slider
       height: 15%
       display: flex
       justify-content: space-between
+
+    .playback-rate-container
+      margin-bottom: 20px
 
     .button-container
       height: 20%

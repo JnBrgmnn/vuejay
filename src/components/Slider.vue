@@ -1,8 +1,15 @@
 <template>
   <input 
+      v-if="secondaryColor === false"
       type="range" 
-      value="0" 
+      value="50" 
       class="slider" 
+      @input="handleInput"/>
+  <input 
+      v-else-if="secondaryColor === true"
+      type="range" 
+      value="50" 
+      class="slider secondary-color" 
       @input="handleInput"/>
 </template>
 
@@ -13,6 +20,9 @@ export default {
     handleInput(event) {
       this.$emit('sliderInput', event.target.value)
     }
+  },
+  props: {
+    secondaryColor: Boolean,
   }
 }
 </script>
@@ -22,9 +32,16 @@ export default {
 
 .slider
   -webkit-appearance: none
-  width: 290px
+  width: 100%
   height: 35px
   background-color: $color-primary-light
+  margin-top: 20px
+
+  &.secondary-color
+    background-color: $color-secondary-light
+
+    &::-webkit-slider-thumb
+      background-color: $color-secondary
 
   &:focus
     outline: none
