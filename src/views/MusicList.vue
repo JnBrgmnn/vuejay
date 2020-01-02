@@ -86,8 +86,7 @@ export default {
 
 .music-list
   display: flex
-  height: 49%
-  height: calc(50% - 20px)
+  height: 50%
   background-color: $background-color-dark
 
   .search-container

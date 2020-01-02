@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <h1 class="heading">
+    <h1 id="heading">
       <span>Dee</span>
       <span>Jay</span>
     </h1>
-    <Mixer 
+    <Mixer id="mixer"
         :songTrackOne="songTrackOne"
         :songTrackTwo="songTrackTwo"/>
-    <MusicList 
+    <MusicList id="music-list"
         @songTrackOne="setSongTrackOne"
         @songTrackTwo="setSongTrackTwo"/>
   </div>
@@ -71,14 +71,18 @@ body
 #app
   height: 100vh
 
-.heading
+#heading
   padding: 10px
   text-align: center
   font-size: 58px
+  height: 8%
 
   span:first-child
     color: $color-primary
 
   span:nth-child(2)
     color: $color-secondary
+
+#mixer
+  height: 40%
 </style>

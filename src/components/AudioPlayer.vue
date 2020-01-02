@@ -231,7 +231,7 @@ export default {
       flex-direction: row-reverse
 
     .knob-container
-      height: 100%
+      height: 276px
       width: 50%
       display: flex
       flex-direction: column
@@ -241,6 +241,6 @@ export default {
     .volume-container
       display: flex
       justify-content: center
-      height: 100%
+      height: 276px
       width: 50%
 </style>

@@ -35,7 +35,6 @@ export default {
   width: 100%
   height: 35px
   background-color: $color-primary-light
-  margin-top: 20px
 
   &.secondary-color
     background-color: $color-secondary-light
@@ -49,6 +48,6 @@ export default {
   &::-webkit-slider-thumb
     background-color: $color-primary
     -webkit-appearance: none
-    height: 35px
-    width: 35px
+    height: 37px
+    width: 37px
 </style>
