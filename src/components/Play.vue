@@ -1,13 +1,18 @@
 <template>
   <div class="play-container">
-    <button v-if="secondaryColor === false"
-          class="play-button"
-          @click="handleClick"
-    ><i class="fas fa-play"></i></button>
+    <button 
+        v-if="secondaryColor === false"
+        class="play-button"
+        @click="handleClick">
+      <i v-if="isActive === false" class="fas fa-play"></i>
+      <i v-else-if="isActive === true" class="fas fa-pause"></i>
+    </button>
     <button v-else-if="secondaryColor === true"
-          class="play-button secondary-color"
-          @click="handleClick"
-    ><i class="fas fa-play"></i></button>
+        class="play-button secondary-color"
+        @click="handleClick">
+      <i v-if="isActive === false" class="fas fa-play"></i>
+      <i v-else-if="isActive === true" class="fas fa-pause"></i>
+    </button>
   </div>
 </template>
 

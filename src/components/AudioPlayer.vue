@@ -88,11 +88,13 @@ export default {
   data() {
     return {
       playbackRate: 1,
+      volume: 0.5,
     }
   },
   props: {
     secondaryColor: Boolean,
-    song: Object
+    song: Object,
+    crossfade: Number,
   },
   async mounted() {
     if(this.secondaryColor === false) {
@@ -117,6 +119,7 @@ export default {
       })
     }
     this.wavesurfer.load('./Linkin_Park-In_The_End.mp3')
+    this.wavesurfer.setVolume((this.volume) * this.crossfade)
 
     this.treble = this.wavesurfer.backend.ac.createBiquadFilter()
     this.treble.type = 'highshelf'
@@ -137,6 +140,8 @@ export default {
         parameterData: {bitDepth: 4, frequencyReduction: .5}
       })
     })
+    
+    this.wavesurfer.backend.setFilters([this.treble, this.mid, this.bass])
   },
   methods: {
     setPlaybackRate(value) {
@@ -182,12 +187,17 @@ export default {
       this.bass.gain.value = value/10
     },
     setVolume(value) {
-      this.wavesurfer.setVolume(value/100)
+      this.volume = value/100
+      this.wavesurfer.setVolume(this.volume * this.crossfade)
     }
   },
   watch: {
     song: function(song) {
       this.wavesurfer.load(song.path)
+    },
+    crossfade: function(value) {
+      this.crossfade = value
+      this.wavesurfer.setVolume(this.volume * this.crossfade)
     }
   },
 }

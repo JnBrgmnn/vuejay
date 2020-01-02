@@ -1,6 +1,7 @@
 <template>
   <div v-if="secondaryColor === false" class="effects-container">
-    <button class="effect-button" @click="handleEffect">{{ activeEffect }}</button>
+    <button v-if="isActive === false" class="effect-button" @click="handleEffect">{{ activeEffect }}</button>
+    <button v-else-if="isActive === true" class="effect-button active" @click="handleEffect">{{ activeEffect }}</button>
     <button class="dropdown-button" @click="toggleDropdown"><i class="fas fa-caret-down"></i></button>
     <div class="dropdown-menu" v-show="isVisible">
       <div class="dropdown">
@@ -11,7 +12,8 @@
     </div>
   </div>
   <div v-else-if="secondaryColor === true" class="effects-container">
-    <button class="effect-button secondary-color" @click="handleEffect">{{ activeEffect }}</button>
+    <button v-if="isActive === false" class="effect-button secondary-color" @click="handleEffect">{{ activeEffect }}</button>
+    <button v-if="isActive === true" class="effect-button secondary-color active" @click="handleEffect">{{ activeEffect }}</button>
     <button class="dropdown-button secondary-color" @click="toggleDropdown"><i class="fas fa-caret-down"></i></button>
     <div class="dropdown-menu secondary-color" v-show="isVisible">
       <div class="dropdown secondary-color">
@@ -67,9 +69,15 @@ export default {
     width: 85%
     border-right: solid 2px $color-primary-dark
 
+    &.active
+      background-color: $color-primary-dark
+
     &.secondary-color
       background-color: $color-secondary
       border-right: solid 2px $color-secondary-dark
+
+      &.active
+        background-color: $color-secondary-dark
 
   .dropdown-button
     width: 15%

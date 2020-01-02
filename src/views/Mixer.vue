@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="mixer">
-      <AudioPlayer :secondaryColor="false" :song="songTrackOne"/>
-      <AudioPlayer :secondaryColor="true" :song="songTrackTwo"/>
+      <AudioPlayer :secondaryColor="false" :song="songTrackOne" :crossfade="1 - (crossfade/1) / 100"/>
+      <AudioPlayer :secondaryColor="true" :song="songTrackTwo" :crossfade="(crossfade/1) / 100"/>
     </div>
-    <Slider class="crossfade-slider" />
+    <Slider class="crossfade-slider" @sliderInput="setCrossfade"/>
   </div>
 </template>
 
@@ -18,9 +18,19 @@ export default {
     AudioPlayer,
     Slider
   },
+  data() {
+    return {
+      crossfade: 50,
+    }
+  },
   props: {
     songTrackOne: Object,
     songTrackTwo: Object
+  },
+  methods: {
+    setCrossfade(value) {
+      this.crossfade = value
+    }
   }
 }
 </script>

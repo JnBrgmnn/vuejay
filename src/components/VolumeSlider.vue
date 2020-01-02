@@ -2,11 +2,13 @@
   <input 
       v-if="secondaryColor === false" 
       type="range" 
+      value="50"
       class="volume-slider"
       @input="handleInput">
     <input 
       v-else-if="secondaryColor === true" 
       type="range" 
+      value="50"
       class="volume-slider secondary-color"
       @input="handleInput">
 </template>
