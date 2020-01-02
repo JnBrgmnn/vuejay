@@ -125,17 +125,24 @@ export default {
     this.bass.type = 'lowshelf'
     this.bass.gain.value = 5
 
-    this.wavesurfer.backend.setFilters([this.treble, this.mid, this.bass])
+    const context = this.wavesurfer.backend.ac
+
+    context.audioWorklet.addModule('./Bitcrusher.js').then(() => {
+      this.bitcrusher = new AudioWorkletNode(context, 'bitcrusher', {
+        parameterData: {bitDepth: 4, frequencyReduction: .5}
+      })
+    })
+    
   },
   methods: {
-    setEffectValueLeft(value) {
-      console.log('Left Effect Slider', value)
-    },
-    setEffectValueRight(value) {
-      console.log('Right Effect Slider', value)
-    },
-    setEffect(value) {
-      console.log('Effect', value)
+    setEffect(isActive, effect) {
+      if(isActive) {
+        if(effect === 'Bitcrusher') {
+          this.wavesurfer.backend.setFilters([this.treble, this.mid, this.bass, this.bitcrusher])
+        }
+      } else {
+        this.wavesurfer.backend.setFilters([this.treble, this.mid, this.bass])
+      }
     },
     loopTrack(loopValue, isLooped) {
       if(isLooped) {

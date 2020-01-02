@@ -25,7 +25,8 @@ export default {
   },
   methods: {
     handleEffect() {
-      this.$emit('effect', this.activeEffect)
+      this.isActive = !this.isActive
+      this.$emit('effect', this.isActive, this.activeEffect)
     },
     toggleDropdown() {
       this.isVisible = !this.isVisible
