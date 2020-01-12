@@ -1,8 +1,7 @@
 <template>
   <div class="knob">
     <circle-slider v-if="secondaryColor === false" class="knob-slider"
-        :value="sliderValue"
-        @input="handleInput"
+        v-model="value"
         :progress-width="8"
         :circleWidth="8"
         :knob-radius="8"
@@ -12,8 +11,7 @@
         :knobColor="'#EE4540'"
     />
     <circle-slider v-else-if="secondaryColor === true" class="knob-slider"
-        :value="sliderValue"
-        @input="handleInput"
+        v-model="value"
         :progress-width="8"
         :circleWidth="8"
         :knob-radius="8"
@@ -22,7 +20,7 @@
         :progressColor="'#C72C41'"
         :knobColor="'#C72C41'"
     />
-    <p>{{ sliderValue }}</p>
+    <p>{{ value }}</p>
     <p>{{ text }}</p>
   </div>
 </template>
@@ -32,21 +30,20 @@ export default {
   name: 'Knob',
   data() {
     return {
-      sliderValue: 50,
-      isReady: false
+      value: 50,
     }
   },
   props: {
     text: String,
-    secondaryColor: Boolean
+    secondaryColor: Boolean,
+    midiKnobValue: Number,
   },
-  methods: {
-    handleInput(value) {
-      if(this.isReady) {
-        this.$emit('knob', value)
-      }
-      this.sliderValue = value
-      this.isReady = true
+  watch: {
+    value: function() {
+      this.$emit('knob', this.value)
+    },
+    midiKnobValue: function(newValue) {
+      this.value = newValue * 100
     }
   }
 }

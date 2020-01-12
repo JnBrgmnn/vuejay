@@ -19,9 +19,9 @@
 
     <div class="panel-container">
       <div class="knob-container">
-        <Knob text="Treble" @knob="setTreble" :secondaryColor="secondaryColor"/>
-        <Knob text="Mid" @knob="setMid" :secondaryColor="secondaryColor"/>
-        <Knob text="Bass" @knob="setBass" :secondaryColor="secondaryColor"/>
+        <Knob text="Treble" @knob="setTreble" :secondaryColor="secondaryColor" :midiKnobValue="midiTrebleLeft"/>
+        <Knob text="Mid" @knob="setMid" :secondaryColor="secondaryColor" :midiKnobValue="midiMidLeft"/>
+        <Knob text="Bass" @knob="setBass" :secondaryColor="secondaryColor" :midiKnobValue="midiBassLeft"/>
       </div>
       <div class="volume-container">
         <VolumeSlider @volumeInput="setVolume" :midiVolume="midiVolumeLeft"/>
@@ -51,9 +51,9 @@
 
     <div class="panel-container secondary-color">
       <div class="knob-container">
-        <Knob text="Treble" @knob="setTreble" :secondaryColor="secondaryColor"/>
-        <Knob text="Mid" @knob="setMid" :secondaryColor="secondaryColor"/>
-        <Knob text="Bass" @knob="setBass" :secondaryColor="secondaryColor"/>
+        <Knob text="Treble" @knob="setTreble" :secondaryColor="secondaryColor" :midiKnobValue="midiTrebleRight"/>
+        <Knob text="Mid" @knob="setMid" :secondaryColor="secondaryColor" :midiKnobValue="midiMidRight"/>
+        <Knob text="Bass" @knob="setBass" :secondaryColor="secondaryColor" :midiKnobValue="midiBassRight"/>
       </div>
       <div class="volume-container">
         <VolumeSlider @volumeInput="setVolume" :secondaryColor="secondaryColor" :midiVolume="midiVolumeRight"/>
@@ -89,10 +89,16 @@ export default {
     return {
       playbackRate: 1,
       volume: 0.5,
-      midiPlayLeft: true,
-      midiPlayRight: true,
+      midiPlayLeft: false,
+      midiPlayRight: false,
       midiVolumeLeft: 0.5,
       midiVolumeRight: 0.5,
+      midiTrebleLeft: 0.5,
+      midiTrebleRight: 0.5,
+      midiMidLeft: 0.5,
+      midiMidRight: 0.5,
+      midiBassLeft: 0.5,
+      midiBassRight: 0.5
     }
   },
   props: {
@@ -107,11 +113,13 @@ export default {
           let inputs = midi.inputs
           for (let input of inputs.values()) {
             input.onmidimessage = (event) => {
-              /* console.log(event.data) */
+              console.log(event.data)
               switch (event.data[1]) {
                 case 16: 
-                  if(event.data[2] === 127) {
+                  if(event.data[0] === 153 && event.data[2] === 127) {
                     this.midiPlayLeft = !this.midiPlayLeft
+                  } else if(event.data[0] === 185) {
+                    this.midiBassRight = event.data[2]/127
                   }
                   break
                 case 17: 
@@ -124,6 +132,21 @@ export default {
                   break
                 case 50:
                   this.midiVolumeRight = event.data[2]/127
+                  break
+                case 7:
+                  this.midiTrebleLeft = event.data[2]/127
+                  break
+                case 8:
+                  this.midiTrebleRight = event.data[2]/127
+                  break
+                case 11:
+                  this.midiMidLeft = event.data[2]/127
+                  break
+                case 12:
+                  this.midiMidRight = event.data[2]/127
+                  break
+                case 15:
+                  this.midiBassLeft = event.data[2]/127
                   break
               }
             }
