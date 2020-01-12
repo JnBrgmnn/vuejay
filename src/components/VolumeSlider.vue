@@ -47,7 +47,7 @@ export default {
   background-color: $color-primary-light
 
   &.secondary-color
-    background-color: $color-secondary-light
+    background-color: $color-primary-light
 
     &::-webkit-slider-thumb
       background-color: $color-secondary

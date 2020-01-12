@@ -99,7 +99,7 @@ export default {
     z-index: 10
 
     &.secondary-color
-      background-color: $color-secondary-light
+      background-color: $color-primary-light
       right: 2.6%
 
     .dropdown
