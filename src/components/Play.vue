@@ -26,21 +26,13 @@ export default {
   },
   props: {
     secondaryColor: Boolean,
-    midiPlay: Boolean,
   },
   methods: {
     handleClick() {
       this.isActive = !this.isActive
-    }
-  },
-  watch: {
-    midiPlay: function(newValue) {
-      this.isActive = newValue
-    },
-    isActive: function() {
       this.$emit('play', this.isActive)
     }
-  }
+  },
 }
 </script>
 

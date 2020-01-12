@@ -13,7 +13,7 @@
       <div class="button-container">
         <Effects @effect="setEffect"/>
         <Loop @loop="loopTrack"/>
-        <Play @play="toggleTrack" :midiPlay="midiPlayLeft"/>
+        <Play @play="toggleTrack"/>
       </div>
     </div>
 
@@ -45,7 +45,7 @@
       <div class="button-container secondary-color">
         <Effects @effect="setEffect" :secondaryColor="secondaryColor"/>
         <Loop @loop="loopTrack" :secondaryColor="secondaryColor"/>
-        <Play @play="toggleTrack" :secondaryColor="secondaryColor" :midiPlay="midiPlayRight"/>
+        <Play @play="toggleTrack" :secondaryColor="secondaryColor"/>
       </div>
     </div>
 
@@ -89,8 +89,6 @@ export default {
     return {
       playbackRate: 1,
       volume: 0.5,
-      midiPlayLeft: false,
-      midiPlayRight: false,
       midiVolumeLeft: 0.5,
       midiVolumeRight: 0.5,
       midiTrebleLeft: 0.5,
@@ -115,18 +113,6 @@ export default {
             input.onmidimessage = (event) => {
               console.log(event.data)
               switch (event.data[1]) {
-                case 16: 
-                  if(event.data[0] === 153 && event.data[2] === 127) {
-                    this.midiPlayLeft = !this.midiPlayLeft
-                  } else if(event.data[0] === 185) {
-                    this.midiBassRight = event.data[2]/127
-                  }
-                  break
-                case 17: 
-                  if(event.data[2] === 127) {
-                    this.midiPlayRight = !this.midiPlayRight
-                  }
-                  break
                 case 49:
                   this.midiVolumeLeft = event.data[2]/127
                   break
@@ -147,6 +133,11 @@ export default {
                   break
                 case 15:
                   this.midiBassLeft = event.data[2]/127
+                  break
+                case 16: 
+                  if(event.data[0] === 185) {
+                    this.midiBassRight = event.data[2]/127
+                  }
                   break
                 case 64:
                   this.$emit('midiCrossfade', event.data[2]/127) 
