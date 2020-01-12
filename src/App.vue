@@ -53,6 +53,7 @@ body
   color: $font-color
   font-family: "Montserrat", sans-serif
   cursor: default
+  overflow: hidden
 
   ::-webkit-scrollbar
     width: 10px

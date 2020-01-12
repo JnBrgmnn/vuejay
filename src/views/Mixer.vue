@@ -40,7 +40,7 @@ export default {
   display: flex
   flex-wrap: wrap
   height: 80%
-  padding: 0 50px 0
+  padding: 0 50px 20px
 
 .crossfade-slider
   position: relative
