@@ -4,25 +4,34 @@
       type="range" 
       value="50" 
       class="slider" 
-      @input="handleInput"/>
+      v-model="value"/>
   <input 
       v-else-if="secondaryColor === true"
       type="range" 
       value="50" 
       class="slider secondary-color" 
-      @input="handleInput"/>
+      v-model="value"/>
 </template>
 
 <script>
 export default {
   name: 'Slider',
-  methods: {
-    handleInput(event) {
-      this.$emit('sliderInput', event.target.value)
+  data() {
+    return {
+      value: Number,
     }
   },
   props: {
     secondaryColor: Boolean,
+    midiCrossfade: Number
+  },
+  watch: {
+    value: function() {
+      this.$emit('sliderInput', this.value)
+    },
+    midiCrossfade: function(newValue) {
+      this.value = newValue
+    }
   }
 }
 </script>

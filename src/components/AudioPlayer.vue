@@ -148,6 +148,9 @@ export default {
                 case 15:
                   this.midiBassLeft = event.data[2]/127
                   break
+                case 64:
+                  this.$emit('midiCrossfade', event.data[2]/127) 
+                  break
               }
             }
           }
