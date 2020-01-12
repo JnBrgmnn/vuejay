@@ -13,7 +13,7 @@
       <div class="button-container">
         <Effects @effect="setEffect"/>
         <Loop @loop="loopTrack"/>
-        <Play @play="toggleTrack"/>
+        <Play @play="toggleTrack" :midiPlay="midiPlayLeft"/>
       </div>
     </div>
 
@@ -45,7 +45,7 @@
       <div class="button-container secondary-color">
         <Effects @effect="setEffect" :secondaryColor="secondaryColor"/>
         <Loop @loop="loopTrack" :secondaryColor="secondaryColor"/>
-        <Play @play="toggleTrack" :secondaryColor="secondaryColor"/>
+        <Play @play="toggleTrack" :secondaryColor="secondaryColor" :midiPlay="midiPlayRight"/>
       </div>
     </div>
 
@@ -89,6 +89,8 @@ export default {
     return {
       playbackRate: 1,
       volume: 0.5,
+      midiPlayLeft: false,
+      midiPlayRight: false,
     }
   },
   props: {
@@ -97,6 +99,33 @@ export default {
     crossfade: Number,
   },
   async mounted() {
+    if (navigator.requestMIDIAccess) {
+      navigator.requestMIDIAccess().then(
+        (midi) => {
+          let inputs = midi.inputs
+          for (let input of inputs.values()) {
+            input.onmidimessage = (event) => {
+              console.log(event.data)
+              switch (event.data[1]) {
+                case 16: 
+                  if(event.data[2] === 127) {
+                    this.midiPlayLeft = !this.midiPlayLeft
+                  }
+                  break
+                case 17: 
+                  if(event.data[2] === 127) {
+                    this.midiPlayRight = !this.midiPlayRight
+                  }
+                  break
+              }
+            }
+          }
+        },
+      )
+    } else {
+      console.log("Midi failure")
+    }
+
     if(this.secondaryColor === false) {
       this.wavesurfer = WaveSurfer.create({
         container: '#waveform-left',
@@ -189,7 +218,7 @@ export default {
     setVolume(value) {
       this.volume = value/100
       this.wavesurfer.setVolume(this.volume * this.crossfade)
-    }
+    },
   },
   watch: {
     song: function(song) {
