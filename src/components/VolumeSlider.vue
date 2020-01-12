@@ -4,24 +4,33 @@
       type="range" 
       value="50"
       class="volume-slider"
-      @input="handleInput">
+      v-model="volume">
     <input 
       v-else-if="secondaryColor === true" 
       type="range" 
       value="50"
       class="volume-slider secondary-color"
-      @input="handleInput">
+      v-model="volume">
 </template>
 
 <script>
 export default {
   name: 'VolumeSlider',
+  data() {
+    return {
+      volume: Number
+    } 
+  },
   props: {
     secondaryColor: Boolean,
+    midiVolume: Number,
   },
-  methods: {
-    handleInput(event) {
-      this.$emit('volumeInput', event.target.value)
+  watch: {
+    volume: function() {
+      this.$emit('volumeInput', this.volume)
+    },
+    midiVolume: function(newValue) {
+      this.volume = newValue * 100
     }
   }
 }
