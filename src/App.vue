@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1 id="heading">
-      <span>Dee</span>
+      <span>Vue</span>
       <span>Jay</span>
     </h1>
     <Mixer id="mixer"
